@@ -1,6 +1,7 @@
 package coursework;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import model.Fitness;
 import model.Individual;
@@ -123,7 +124,41 @@ public class ExampleEvolutionaryAlgorithm extends NeuralNetwork {
 	private Individual select() {		
 		Individual parent = population.get(Parameters.random.nextInt(Parameters.popSize));
 		return parent.copy();
+		
+		 // tournament selection picks x random chromosomes,
+        // and returns the fittest one
+        int picked;
+        int bestIndex;
+        double fitness;
+        double bestFit;
+        
+        Random random = new Random();
+
+        // pick one
+        Individual bestFighter = getRandomChromo();
+        bestFit = bestFighter.fitness;
+        bestIndex = picked;
+
+        // pick tnSize-1 more and then see which is the best
+        for (int i = 0; i < 5 - 1; i++)
+        {
+            int randomNum = random.nextInt(Parameters.popSize);
+            Individual challenger = population.get(randomNum);
+            if (population.get(picked) > bestFit)
+            {
+            	bestFigher 
+            }
+        }
+        return (picked);	// return index of best one 	
 	}
+			
+	private Individual getRandomChromo() {		
+        Random random = new Random();
+        int randomNum = random.nextInt(Parameters.popSize);
+        
+        return population.get(randomNum);
+	}
+	
 
 	/**
 	 * Crossover / Reproduction
