@@ -32,7 +32,7 @@ public class Parameters {
 	public static Random random = new Random(seed);
 
 	//set the NeuralNetwork class here to use your code from the GUI
-	public static Class neuralNetworkClass = ExampleEvolutionaryAlgorithm.class;
+	public static Class neuralNetworkClass = TwoPointTournamentSelectionEA.class;
 	
 	/**
 	 * Do not change any methods that appear below here.

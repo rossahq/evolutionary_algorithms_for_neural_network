@@ -1,7 +1,6 @@
 package coursework;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import model.Fitness;
 import model.Individual;
@@ -14,7 +13,7 @@ import model.NeuralNetwork;
  * You Can Use This Class to implement your EA or implement your own class that extends {@link NeuralNetwork} 
  * 
  */
-public class ExampleEvolutionaryAlgorithm extends NeuralNetwork {
+public class EA2 extends NeuralNetwork {
 	
 
 	/**
@@ -83,7 +82,6 @@ public class ExampleEvolutionaryAlgorithm extends NeuralNetwork {
 		}
 	}
 
-
 	/**
 	 * Returns a copy of the best individual in the population
 	 * 
@@ -115,46 +113,27 @@ public class ExampleEvolutionaryAlgorithm extends NeuralNetwork {
 		return population;
 	}
 
-	/**
-	 * Selection --
-	 * 
-	 * NEEDS REPLACED with proper selection this just returns a copy of a random
-	 * member of the population
-	 */
 	private Individual select() {		
-		Individual parent = population.get(Parameters.random.nextInt(Parameters.popSize));
-		return parent.copy();
 		
-		 // tournament selection picks x random chromosomes,
-        // and returns the fittest one
-        int picked;
-        int bestIndex;
-        double fitness;
-        double bestFit;
-        
-        Random random = new Random();
-
-        // pick one
-        Individual bestFighter = getRandomChromo();
-        bestFit = bestFighter.fitness;
-        bestIndex = picked;
+		// tournament selection picks x random chromosomes and returns the fittest one
+		
+        // pick a fighter
+        Individual bestFighter = getRandomIndividual();
 
         // pick tnSize-1 more and then see which is the best
         for (int i = 0; i < 5 - 1; i++)
         {
-            int randomNum = random.nextInt(Parameters.popSize);
-            Individual challenger = population.get(randomNum);
-            if (population.get(picked) > bestFit)
+            Individual challenger = getRandomIndividual();
+            if (challenger.fitness > bestFighter.fitness)
             {
-            	bestFigher 
+            	bestFighter = challenger;
             }
         }
-        return (picked);	// return index of best one 	
+        return (bestFighter); //return the winner
 	}
 			
-	private Individual getRandomChromo() {		
-        Random random = new Random();
-        int randomNum = random.nextInt(Parameters.popSize);
+	private Individual getRandomIndividual() {		
+        int randomNum = Parameters.random.nextInt(Parameters.popSize);
         
         return population.get(randomNum);
 	}

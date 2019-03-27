@@ -5,7 +5,7 @@ import model.LunarParameters.DataSet;
 import model.NeuralNetwork;
 
 /**
- * Example of how to to run the {@link ExampleEvolutionaryAlgorithm} without the need for the GUI
+ * Example of how to to run the {@link TwoPointTournamentSelectionEA} without the need for the GUI
  * This allows you to conduct multiple runs programmatically 
  * The code runs faster when not required to update a user interface
  *
@@ -33,7 +33,7 @@ public class StartNoGui {
 		
 		
 		//Create a new Neural Network Trainer Using the above parameters 
-		NeuralNetwork nn = new ExampleEvolutionaryAlgorithm();		
+		NeuralNetwork nn = new TwoPointTournamentSelectionEA();		
 		
 		//train the neural net (Go and make a coffee) 
 		nn.run();
