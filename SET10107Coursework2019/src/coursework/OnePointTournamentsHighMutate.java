@@ -1,12 +1,10 @@
 package coursework;
 
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-
 import model.Fitness;
 import model.Individual;
-import model.LunarParameters.DataSet;
 import model.NeuralNetwork;
+
+import java.util.ArrayList;
 
 /**
  * Implements a basic Evolutionary Algorithm to train a Neural Network
@@ -14,7 +12,7 @@ import model.NeuralNetwork;
  * You Can Use This Class to implement your EA or implement your own class that extends {@link NeuralNetwork} 
  * 
  */
-public class OnePointTournaments extends NeuralNetwork {
+public class OnePointTournamentsHighMutate extends NeuralNetwork {
 	
 
 	/**
@@ -147,8 +145,11 @@ public class OnePointTournaments extends NeuralNetwork {
 	 * parents. 
 	 */
 	private ArrayList<Individual> reproduce(Individual parent1, Individual parent2) {
-		/*ArrayList<Individual> children = new ArrayList<>();
-
+		ArrayList<Individual> children = new ArrayList<>();
+		//children.add(parent1.copy());
+		//children.add(parent2.copy());
+		//return children;
+		
 		double percentage = Parameters.random.nextDouble();
 		
 		//one-point crossover
@@ -181,26 +182,6 @@ public class OnePointTournaments extends NeuralNetwork {
 		children.add(child1);
 		children.add(child2);
 
-		return children;*/
-
-		ArrayList<Individual> children = new ArrayList<>();
-
-		Individual child1 = new Individual();
-		Individual child2 = new Individual();
-
-		for (int i = 0; i < Parameters.getNumGenes(); i++) {
-			if (Parameters.random.nextFloat() < 0.5) {
-				child1.chromosome[i] = parent1.chromosome[i];
-				child2.chromosome[i] = parent2.chromosome[i];
-			} else {
-				child1.chromosome[i] = parent2.chromosome[i];
-				child2.chromosome[i] = parent1.chromosome[i];
-			}
-		}
-
-		children.add(child1);
-		children.add(child2);
-
 		return children;
 	} 
 	
@@ -212,7 +193,8 @@ public class OnePointTournaments extends NeuralNetwork {
 	private void mutate(ArrayList<Individual> individuals) {
 		for(Individual individual : individuals) {
 			for (int i = 0; i < individual.chromosome.length; i++) {
-
+			    Parameters.setMutateRate(0.2);
+			    Parameters.setMutateChange(0.25);
 				if (Parameters.random.nextDouble() < Parameters.mutateRate) {
 					if (Parameters.random.nextBoolean()) {
 						individual.chromosome[i] += (Parameters.mutateChange);
