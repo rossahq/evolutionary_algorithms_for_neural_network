@@ -1,5 +1,6 @@
 package coursework;
 
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 
 import model.Fitness;
@@ -13,7 +14,7 @@ import model.NeuralNetwork;
  * You Can Use This Class to implement your EA or implement your own class that extends {@link NeuralNetwork} 
  * 
  */
-public class TwoPointTournamentSelectionEA extends NeuralNetwork {
+public class OnePointTournaments extends NeuralNetwork {
 	
 
 	/**
@@ -121,10 +122,10 @@ public class TwoPointTournamentSelectionEA extends NeuralNetwork {
         Individual bestFighter = getRandomIndividual();
 
         // pick tnSize-1 more and then see which is the best
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < population.size()/3; i++)
         {
             Individual challenger = getRandomIndividual();
-            if (challenger.fitness > bestFighter.fitness)
+            if (challenger.fitness < bestFighter.fitness)
             {
             	bestFighter = challenger;
             }
@@ -147,15 +148,15 @@ public class TwoPointTournamentSelectionEA extends NeuralNetwork {
 	 */
 	private ArrayList<Individual> reproduce(Individual parent1, Individual parent2) {
 		ArrayList<Individual> children = new ArrayList<>();
-		children.add(parent1.copy());
-		children.add(parent2.copy());		
+		//children.add(parent1.copy());
+		//children.add(parent2.copy());
 		//return children;
 		
 		double percentage = Parameters.random.nextDouble();
 		
 		//one-point crossover
         int crossPoint;
-        Individual child = new Individual();
+        Individual child1 = new Individual();
         int i;
 
         // pick crosspoint at random
@@ -165,17 +166,25 @@ public class TwoPointTournamentSelectionEA extends NeuralNetwork {
         // part from p2
 
         for (i = 0; i < crossPoint; i++) {
-            child.chromosome[i] = parent1.chromosome[i];
+            child1.chromosome[i] = parent1.chromosome[i];
         }
         for (i = crossPoint; i < (Parameters.getNumGenes()); i++) {
-            child.chromosome[i] = parent1.chromosome[i];
+            child1.chromosome[i] = parent2.chromosome[i];
         }
-        
-        children.add(child);
-        
-        System.out.println("Children: " + children.get(0).chromosome.toString());
+
+		Individual child2 = new Individual();
+
+		for (i = 0; i < crossPoint; i++) {
+			child2.chromosome[i] = parent1.chromosome[i];
+		}
+		for (i = crossPoint; i < (Parameters.getNumGenes()); i++) {
+			child2.chromosome[i] = parent2.chromosome[i];
+		}
+
+		children.add(child1);
+		children.add(child2);
+
 		return children;
-		
 	} 
 	
 	/**
@@ -183,9 +192,12 @@ public class TwoPointTournamentSelectionEA extends NeuralNetwork {
 	 * 
 	 * 
 	 */
-	private void mutate(ArrayList<Individual> individuals) {		
+	private void mutate(ArrayList<Individual> individuals) {
 		for(Individual individual : individuals) {
 			for (int i = 0; i < individual.chromosome.length; i++) {
+				if (evaluations > 15000) {
+					Parameters.setMutateRate(1.1);
+				}
 				if (Parameters.random.nextDouble() < Parameters.mutateRate) {
 					if (Parameters.random.nextBoolean()) {
 						individual.chromosome[i] += (Parameters.mutateChange);
@@ -204,10 +216,26 @@ public class TwoPointTournamentSelectionEA extends NeuralNetwork {
 	 * 
 	 */
 	private void replace(ArrayList<Individual> individuals) {
+
 		for(Individual individual : individuals) {
-			int idx = getWorstIndex();		
-			population.set(idx, individual);
-		}		
+			//int idx = getWorstIndex();
+			//population.set(idx, individual);
+
+			Individual worstFighter = getRandomIndividual();
+
+			// pick tnSize-1 more and then see which is the best
+			for (int i = 0; i < population.size()/3; i++)
+			{
+				Individual challenger = getRandomIndividual();
+				if (challenger.fitness > worstFighter.fitness)
+				{
+					worstFighter = challenger;
+				}
+			}
+
+			int index = population.indexOf(worstFighter);
+			population.set(index, individual);
+		}
 	}
 
 	

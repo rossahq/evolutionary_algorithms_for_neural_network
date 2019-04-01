@@ -5,7 +5,7 @@ import model.LunarParameters.DataSet;
 import model.NeuralNetwork;
 
 /**
- * Example of how to to run the {@link TwoPointTournamentSelectionEA} without the need for the GUI
+ * Example of how to to run the {@link OnePointTournaments} without the need for the GUI
  * This allows you to conduct multiple runs programmatically 
  * The code runs faster when not required to update a user interface
  *
@@ -33,7 +33,7 @@ public class StartNoGui {
 		
 		
 		//Create a new Neural Network Trainer Using the above parameters 
-		NeuralNetwork nn = new TwoPointTournamentSelectionEA();		
+		NeuralNetwork nn = new OnePointTournaments();
 		
 		//train the neural net (Go and make a coffee) 
 		nn.run();
@@ -42,9 +42,6 @@ public class StartNoGui {
 		 * (these will have been saved to disk in the project default directory) 
 		 */
 		System.out.println(nn.best);
-		
-		
-		
 		
 		/**
 		 * We now need to test the trained network on the unseen test Set

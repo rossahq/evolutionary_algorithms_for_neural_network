@@ -20,8 +20,16 @@ public class Parameters {
 		
 	public static int popSize = 40;
 	public static int maxEvaluations = 20000;
-	
-	// Parameters for mutation 
+
+	public static void setMutateRate(double mutateRate) {
+		Parameters.mutateRate = mutateRate;
+	}
+
+	public static void setMutateChange(double mutateChange) {
+		Parameters.mutateChange = mutateChange;
+	}
+
+	// Parameters for mutation
 	// Rate = probability of changing a gene
 	// Change = the maximum +/- adjustment to the gene value
 	public static double mutateRate = 0.01; // mutation rate for mutation operator
@@ -32,13 +40,13 @@ public class Parameters {
 	public static Random random = new Random(seed);
 
 	//set the NeuralNetwork class here to use your code from the GUI
-	public static Class neuralNetworkClass = TwoPointTournamentSelectionEA.class;
+	public static Class neuralNetworkClass = OnePointTournaments.class;
 	
 	/**
 	 * Do not change any methods that appear below here.
 	 * 
 	 */
-	
+
 	public static int getNumGenes() {					
 		return numGenes;
 	}
