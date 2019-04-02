@@ -15,7 +15,7 @@ public class Parameters {
 	 */
 	private static int numHidden = 5;	
 	private static int numGenes = calculateNumGenes();
-	public static double minGene = -3; // specifies minimum and maximum weight values 
+	public static double minGene = -3; // specifies minimum and maximum weight values
 	public static double maxGene = +3;
 		
 	public static int popSize = 40;
@@ -40,7 +40,7 @@ public class Parameters {
 	public static Random random = new Random(seed);
 
 	//set the NeuralNetwork class here to use your code from the GUI
-	public static Class neuralNetworkClass = UniformTournaments.class;
+	public static Class neuralNetworkClass = UniformTournamentsReLu.class;
 	
 	/**
 	 * Do not change any methods that appear below here.

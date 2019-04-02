@@ -29,11 +29,13 @@ public class StartNoGui {
 		Parameters.setHidden(5);
 		
 		//Set the data set for training 
+		//Parameters.setDataSet(DataSet.Training);
 		Parameters.setDataSet(DataSet.Training);
-		
-		
+
+
+
 		//Create a new Neural Network Trainer Using the above parameters 
-		NeuralNetwork nn = new UniformTournaments();
+		NeuralNetwork nn = new UniformTournamentsReLu();
 		
 		//train the neural net (Go and make a coffee) 
 		nn.run();
