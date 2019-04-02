@@ -146,11 +146,11 @@ public class UniformTournaments extends NeuralNetwork {
 
         for (int i = 0; i < Parameters.getNumGenes(); i++) {
             if (Parameters.random.nextFloat() < 0.5) {
-                child1.chromosome[i] = parent1.chromosome[i];
-                child2.chromosome[i] = parent2.chromosome[i];
+                child1.chromosome[i] += parent1.chromosome[i];
+                child2.chromosome[i] += parent2.chromosome[i];
             } else {
-                child1.chromosome[i] = parent2.chromosome[i];
-                child2.chromosome[i] = parent1.chromosome[i];
+                child1.chromosome[i] += parent2.chromosome[i];
+                child2.chromosome[i] += parent1.chromosome[i];
             }
         }
 
@@ -166,14 +166,16 @@ public class UniformTournaments extends NeuralNetwork {
      *
      */
     private void mutate(ArrayList<Individual> individuals) {
+/*
         Parameters.setMutateRate(0.1);
         Parameters.setMutateChange(0.15);
+*/
 
         for(Individual individual : individuals) {
-            if (evaluations > 15000) {
+            /*if (evaluations > 15000) {
                 Parameters.setMutateRate(0.3);
                 Parameters.setMutateChange(0.35);
-            }
+            }*/
             for (int i = 0; i < individual.chromosome.length; i++) {
                 if (Parameters.random.nextDouble() < Parameters.mutateRate) {
                     if (Parameters.random.nextBoolean()) {

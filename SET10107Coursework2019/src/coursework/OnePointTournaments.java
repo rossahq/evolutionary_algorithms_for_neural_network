@@ -147,7 +147,7 @@ public class OnePointTournaments extends NeuralNetwork {
 	 * parents. 
 	 */
 	private ArrayList<Individual> reproduce(Individual parent1, Individual parent2) {
-		/*ArrayList<Individual> children = new ArrayList<>();
+		ArrayList<Individual> children = new ArrayList<>();
 
 		double percentage = Parameters.random.nextDouble();
 		
@@ -176,26 +176,6 @@ public class OnePointTournaments extends NeuralNetwork {
 		}
 		for (i = crossPoint; i < (Parameters.getNumGenes()); i++) {
 			child2.chromosome[i] = parent2.chromosome[i];
-		}
-
-		children.add(child1);
-		children.add(child2);
-
-		return children;*/
-
-		ArrayList<Individual> children = new ArrayList<>();
-
-		Individual child1 = new Individual();
-		Individual child2 = new Individual();
-
-		for (int i = 0; i < Parameters.getNumGenes(); i++) {
-			if (Parameters.random.nextFloat() < 0.5) {
-				child1.chromosome[i] = parent1.chromosome[i];
-				child2.chromosome[i] = parent2.chromosome[i];
-			} else {
-				child1.chromosome[i] = parent2.chromosome[i];
-				child2.chromosome[i] = parent1.chromosome[i];
-			}
 		}
 
 		children.add(child1);
